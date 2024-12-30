@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('../images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+}
+
+header ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+header ul li {
+    display: inline;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+header ul li a:hover {
+    text-decoration: underline;
+}
