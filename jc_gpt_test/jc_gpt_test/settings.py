@@ -15,7 +15,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'token')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['147.45.143.194', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['147.45.143.194', '127.0.0.1', 'localhost', 'jc-gpt.ddns.net']
 
 
 # Application definition
