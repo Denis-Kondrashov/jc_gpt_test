@@ -70,7 +70,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB', 'postgres'),
         'USER': os.getenv('POSTGRES_USER', 'postgres'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-        'HOST': 'postgres_container',
+        'HOST': 'postgres_container',  # Имя контейнера PostgreSQL
         'PORT': '5432',
     }
 }
@@ -110,16 +110,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = '/var/www/jc_gpt_test/static/'
-STATIC_ROOT = '/static/'
+STATIC_ROOT = '/var/www/jc_gpt_test/static/'
+# STATIC_ROOT = '/static/'
 
 
 
 #STATIC_URL = 'static/'
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
 #STATIC_ROOT = BASE_DIR / 'staticfiles'
 
