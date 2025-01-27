@@ -1,42 +1,8 @@
-# # Версия docker-compose
-# version: '3'
-
-# # Перечень volume
-# volumes:
-#   pg_data:  # Для сохранения данных PostgreSQL
-
-# # Перечень контейнеров
-# services:
-#   # Контейнер базы данных PostgreSQL
-#   postgres_container:
-#     # Используем официальный образ PostgreSQL версии 15.4
-#     image: postgres:15.4
-#     # Файл с переменными окружения
-#     env_file: .env
-#     # Подключение volume для хранения данных базы
-#     volumes:
-#       - pg_data:/var/lib/postgresql/data
-#     # Сеть создаётся автоматически; 
-#     # контейнер будет в одной сети с jc_gpt_test_container (по умолчанию)
-
-#   # Контейнер вашего проекта
-#   jc_gpt_test_container:
-#     # Собираем контейнер из Dockerfile в папке jc_gpt_test
-#     build: ./
-#     # Файл с переменными окружения
-#     env_file: .env
-#     # Зависимость: контейнер начнёт запускаться после postgres_container
-#     depends_on:
-#       - postgres_container
-#     ports:
-#       - "8000:8000"  # Проброс порта контейнера на хост
-
-
 version: '3'
 
 volumes:
   pg_data:
-  static_volume:  # Добавляем volume для статики
+  static_volume:
 
 services:
   postgres_container:
@@ -51,7 +17,7 @@ services:
     depends_on:
       - postgres_container
     volumes:
-      - static_volume:/var/www/jc_gpt_test/static  # Монтируем volume для статики
+      - static_volume:/var/www/jc_gpt_test/static
     command: gunicorn --bind 0.0.0.0:8000 jc_gpt_test.wsgi
 
   nginx:
@@ -61,4 +27,4 @@ services:
     ports:
       - "80:80"
     volumes:
-      - static_volume:/var/www/jc_gpt_test/static  # Общий volume с приложением
+      - static_volume:/var/www/jc_gpt_test/static

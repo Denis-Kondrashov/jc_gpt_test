@@ -111,12 +111,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/jc_gpt_test/static/'
-# STATIC_ROOT = '/static/'
-
-
-
-#STATIC_URL = 'static/'
-
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
