@@ -1,0 +1,6 @@
+Django
+pep8
+python-dotenv
+pillow
+django-debug-toolbar
+psycopg2-binary

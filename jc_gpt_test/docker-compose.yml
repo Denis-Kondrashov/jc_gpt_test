@@ -1,0 +1,30 @@
+version: '3'
+
+volumes:
+  pg_data:
+  static_volume:
+
+services:
+  postgres_container:
+    image: postgres:15.4
+    env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  jc_gpt_test_container:
+    build: ./
+    env_file: .env
+    depends_on:
+      - postgres_container
+    volumes:
+      - static_volume:/var/www/jc_gpt_test/static
+    command: gunicorn --bind 0.0.0.0:8000 jc_gpt_test.wsgi
+
+  nginx:
+    build: ./nginx
+    depends_on:
+      - jc_gpt_test_container
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/var/www/jc_gpt_test/static
