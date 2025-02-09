@@ -53,7 +53,7 @@ jobs:
           passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
           script: |
             # Перейдите в директорию , где находится ваш проект на сервере
-            cd /root/jc_gpt_test   # Замените на фактический путь, если отличается
+            cd /root/jc_gpt_test/jc_gpt_test   # Замените на фактический путь, если отличается
             # Обновляем образы и перезапускаем контейнеры с использованием docker-compose
             docker-compose -f docker-compose.production.yml pull
             docker-compose -f docker-compose.production.yml up -d --remove-orphans
