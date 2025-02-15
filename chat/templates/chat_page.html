@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Chatbot
+{% endblock %}
+
+{% block extra_css %}
+  <!-- Подключаем дополнительные стили только для этого чата -->
+  <link rel="stylesheet" href="{% static 'css/chat_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="wrapper">
+    <form id="chat-form">
+      {% csrf_token %}
+      <textarea id="input" placeholder="Enter your message" cols="50"></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+    <pre id="body"></pre>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <!-- Подключаем дополнительные скрипты только для этого чата -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    const bodyElement = document.getElementById('body');
+    const submitBtn = document.querySelector('button');
+    const input = document.getElementById('input');
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    submitBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const response = await fetch("/answer/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken
+        },
+        body: JSON.stringify({ message: input.value })
+      });
+
+      const reader = response.body.getReader();
+      let output = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        output += new TextDecoder().decode(value);
+        bodyElement.innerHTML = marked.parse(output);
+
+        if (done) {
+          return;
+        }
+      }
+    });
+  </script>
+{% endblock %}
