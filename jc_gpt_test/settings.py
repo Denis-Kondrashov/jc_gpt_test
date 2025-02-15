@@ -40,6 +40,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://jc-gpt.ddns.net',
+]
+
 ROOT_URLCONF = 'jc_gpt_test.urls'
 
 TEMPLATES = [
