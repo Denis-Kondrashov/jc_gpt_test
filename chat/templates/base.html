@@ -1,26 +1,32 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Chat App{% endblock %}</title>
+
+    <!-- Основные стили проекта -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="//code.jivo.ru/widget/cJWzKNkUyH" async></script>
+
+    <!-- Если нужно подключать дополнительные стили из дочерних шаблонов: -->
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="{% url 'chat:index' %}">Главная</a></li>
+                <li><a href="{% url 'chat:chat_page' %}">Чат</a></li>
                 <li><a href="{% url 'chat:about' %}">О Проекте</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
+
+    <!-- Если нужно подключать дополнительные скрипты из дочерних шаблонов: -->
+    {% block extra_js %}{% endblock %}
 </body>
 </html>
